@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    width: 40vw;
+    height: 40vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.square {
+    display:flex;
+    border: 2px solid black;
+    font-size: 10vw;
+    justify-content: center;
+    align-content: center;
+}
