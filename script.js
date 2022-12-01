@@ -1,51 +1,56 @@
 const squares = document.querySelectorAll('.square');
-let gameBoard = [];
-let turn = 1;
 
+let gameState = {
+    gameBoard: [],
+    turn: 1
+}
 
 const gameControls = (() => {
 
     const checkForWin = () => {
-        if ((gameBoard[0] == 1 && gameBoard[1] == 1 && gameBoard[2] == 1) ||
-            (gameBoard[3] == 1 && gameBoard[4] == 1 && gameBoard[5] == 1) ||
-            (gameBoard[6] == 1 && gameBoard[7] == 1 && gameBoard[8] == 1) ||
-            (gameBoard[0] == 1 && gameBoard[3] == 1 && gameBoard[6] == 1) ||
-            (gameBoard[1] == 1 && gameBoard[4] == 1 && gameBoard[7] == 1) ||
-            (gameBoard[2] == 1 && gameBoard[5] == 1 && gameBoard[8] == 1) ||
-            (gameBoard[0] == 1 && gameBoard[3] == 1 && gameBoard[8] == 1) ||
-            (gameBoard[6] == 1 && gameBoard[4] == 1 && gameBoard[2] == 1)) {
+        if ((gameState.gameBoard[0] == 1 && gameState.gameBoard[1] == 1 && gameState.gameBoard[2] == 1) ||
+            (gameState.gameBoard[3] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[5] == 1) ||
+            (gameState.gameBoard[6] == 1 && gameState.gameBoard[7] == 1 && gameState.gameBoard[8] == 1) ||
+            (gameState.gameBoard[0] == 1 && gameState.gameBoard[3] == 1 && gameState.gameBoard[6] == 1) ||
+            (gameState.gameBoard[1] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[7] == 1) ||
+            (gameState.gameBoard[2] == 1 && gameState.gameBoard[5] == 1 && gameState.gameBoard[8] == 1) ||
+            (gameState.gameBoard[0] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[8] == 1) ||
+            (gameState.gameBoard[6] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[2] == 1)) {
                 //x's win
                 console.log('x wins!')
-            } else if((gameBoard[0] == 2 && gameBoard[1] == 2 && gameBoard[2] == 2) ||
-            (gameBoard[3] == 2 && gameBoard[4] == 2 && gameBoard[5] == 2) ||
-            (gameBoard[6] == 2 && gameBoard[7] == 2 && gameBoard[8] == 2) ||
-            (gameBoard[0] == 2 && gameBoard[3] == 2 && gameBoard[6] == 2) ||
-            (gameBoard[1] == 2 && gameBoard[4] == 2 && gameBoard[7] == 2) ||
-            (gameBoard[2] == 2 && gameBoard[5] == 2 && gameBoard[8] == 2) ||
-            (gameBoard[0] == 2 && gameBoard[4] == 2 && gameBoard[8] == 2) ||
-            (gameBoard[6] == 2 && gameBoard[4] == 2 && gameBoard[2] == 2)) {
+            } else if((gameState.gameBoard[0] == 2 && gameState.gameBoard[1] == 2 && gameState.gameBoard[2] == 2) ||
+            (gameState.gameBoard[3] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[5] == 2) ||
+            (gameState.gameBoard[6] == 2 && gameState.gameBoard[7] == 2 && gameState.gameBoard[8] == 2) ||
+            (gameState.gameBoard[0] == 2 && gameState.gameBoard[3] == 2 && gameState.gameBoard[6] == 2) ||
+            (gameState.gameBoard[1] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[7] == 2) ||
+            (gameState.gameBoard[2] == 2 && gameState.gameBoard[5] == 2 && gameState.gameBoard[8] == 2) ||
+            (gameState.gameBoard[0] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[8] == 2) ||
+            (gameState.gameBoard[6] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[2] == 2)) {
                 //o's win
                 console.log('o wins!')
+            } else if (gameState.gameBoard.length == 9 && !(gameState.gameBoard.includes(undefined))) {
+                //tie game
+                console.log('tie game!')
             }
     }
 
-    const updateGameBoard = (square, move) => {
-        gameBoard[square] = move;
+    const updateGameState = (square, move) => {
+        gameState.gameBoard[square] = move;
         checkForWin();
     }
 
     function makeMove() {
 
         if (this.innerHTML == '') {
-            if (!(turn % 2 == 0)) {
+            if (!(gameState.turn % 2 == 0)) {
                 this.innerHTML = 'X';
-                turn++
-                updateGameBoard(this.data , 1)
+                gameState.turn++
+                updateGameState(this.data , 1)
 
             } else {
                 this.innerHTML = 'O';
-                turn++
-                updateGameBoard(this.data , 2)
+                gameState.turn++
+                updateGameState(this.data , 2)
             }
         };
     
