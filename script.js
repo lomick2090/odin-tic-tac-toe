@@ -97,7 +97,11 @@ const gameControls = (() => {
     }
 
     function updatePlayerName(input, position) {
-        gameState.player1.name = input;
+        if (position === 0) {
+            gameState.player1.name = input;
+        } else {
+            gameState.player2.name = input;
+        }
         playerName[position].innerHTML = input;
     }
 
