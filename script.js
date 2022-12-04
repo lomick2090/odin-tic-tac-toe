@@ -2,6 +2,7 @@ const squares = document.querySelectorAll('.square');
 const nameSubmits = document.querySelectorAll('.namesubmit');
 const playerName = document.querySelectorAll('div>h1')
 const outcome = document.querySelector('.outcome');
+const winNumber = document.querySelectorAll('.playerholder>h3>span')
 
 const gameControls = (() => {
 
@@ -47,6 +48,10 @@ const gameControls = (() => {
                 restartButton.addEventListener('click', restartGame);
 
                 gameState.player1.wins++;
+                winNumber[0].innerHTML = gameState.player1.wins;
+
+                
+
             } else if((gameState.gameBoard[0] == 2 && gameState.gameBoard[1] == 2 && gameState.gameBoard[2] == 2) ||
             (gameState.gameBoard[3] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[5] == 2) ||
             (gameState.gameBoard[6] == 2 && gameState.gameBoard[7] == 2 && gameState.gameBoard[8] == 2) ||
@@ -58,7 +63,7 @@ const gameControls = (() => {
                 gameState.gameComplete = true;
 
                 gameState.gameComplete = true;
-                
+
                 var winningText = document.createElement('h2');
                 winningText.innerHTML = `${gameState.player2.name} WINS!`;
                 outcome.appendChild(winningText);
@@ -69,11 +74,20 @@ const gameControls = (() => {
                 restartButton.addEventListener('click', restartGame);
 
                 gameState.player2.wins++;
+                winNumber[1].innerHTML = gameState.player2.wins;
 
             } else if (gameState.gameBoard.length == 9 && !(gameState.gameBoard.includes(undefined))) {
-                //tie game
-                console.log('tie game!')
                 gameState.gameComplete = true;
+
+                var winningText = document.createElement('h2');
+                winningText.innerHTML = `TIE GAME!`;
+                outcome.appendChild(winningText);
+
+                var restartButton = document.createElement('button');
+                restartButton.innerHTML = 'Restart';
+                outcome.appendChild(restartButton);
+                restartButton.addEventListener('click', restartGame);
+
             }
     }
 
