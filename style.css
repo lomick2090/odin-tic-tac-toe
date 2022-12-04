@@ -1,12 +1,21 @@
 body {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.playerholder {
     justify-content: center;
+    justify-self: center;
+}
+
+.playerholder > div > input {
+    width: 33%;
 }
 
 .board {
     display: grid;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 }
@@ -14,7 +23,7 @@ body {
 .square {
     display:flex;
     border: 2px solid black;
-    font-size: 10vw;
+    font-size: 7.5vw;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 }
