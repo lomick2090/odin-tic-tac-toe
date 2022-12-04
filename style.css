@@ -27,3 +27,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.outcome {
+    grid-column: 2/3;
+    justify-self: center;
+}

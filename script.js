@@ -1,7 +1,7 @@
 const squares = document.querySelectorAll('.square');
 const nameSubmits = document.querySelectorAll('.namesubmit');
 const playerName = document.querySelectorAll('div>h1')
-
+const outcome = document.querySelector('.outcome');
 
 const gameControls = (() => {
 
@@ -15,6 +15,16 @@ const gameControls = (() => {
         gameComplete: false,
     }
 
+    const restartGame = () => {
+        gameState.gameBoard = [];
+        gameState.turn = 1;
+        gameState.gameComplete = false;
+        while (outcome.firstChild) {
+            outcome.removeChild(outcome.firstChild);
+        }
+        squares.forEach((square) => square.innerHTML = '');
+    }
+
     const checkForWin = () => {
         if ((gameState.gameBoard[0] == 1 && gameState.gameBoard[1] == 1 && gameState.gameBoard[2] == 1) ||
             (gameState.gameBoard[3] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[5] == 1) ||
@@ -24,9 +34,19 @@ const gameControls = (() => {
             (gameState.gameBoard[2] == 1 && gameState.gameBoard[5] == 1 && gameState.gameBoard[8] == 1) ||
             (gameState.gameBoard[0] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[8] == 1) ||
             (gameState.gameBoard[6] == 1 && gameState.gameBoard[4] == 1 && gameState.gameBoard[2] == 1)) {
-                //x's win
-                console.log('x wins!')
+
                 gameState.gameComplete = true;
+
+                var winningText = document.createElement('h2');
+                winningText.innerHTML = `${gameState.player1.name} WINS!`;
+                outcome.appendChild(winningText);
+
+                var restartButton = document.createElement('button');
+                restartButton.innerHTML = 'Restart';
+                outcome.appendChild(restartButton);
+                restartButton.addEventListener('click', restartGame);
+
+                gameState.player1.wins++;
             } else if((gameState.gameBoard[0] == 2 && gameState.gameBoard[1] == 2 && gameState.gameBoard[2] == 2) ||
             (gameState.gameBoard[3] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[5] == 2) ||
             (gameState.gameBoard[6] == 2 && gameState.gameBoard[7] == 2 && gameState.gameBoard[8] == 2) ||
@@ -35,9 +55,21 @@ const gameControls = (() => {
             (gameState.gameBoard[2] == 2 && gameState.gameBoard[5] == 2 && gameState.gameBoard[8] == 2) ||
             (gameState.gameBoard[0] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[8] == 2) ||
             (gameState.gameBoard[6] == 2 && gameState.gameBoard[4] == 2 && gameState.gameBoard[2] == 2)) {
-                //o's win
-                console.log('o wins!')
                 gameState.gameComplete = true;
+
+                gameState.gameComplete = true;
+                
+                var winningText = document.createElement('h2');
+                winningText.innerHTML = `${gameState.player2.name} WINS!`;
+                outcome.appendChild(winningText);
+
+                var restartButton = document.createElement('button');
+                restartButton.innerHTML = 'Restart';
+                outcome.appendChild(restartButton);
+                restartButton.addEventListener('click', restartGame);
+
+                gameState.player2.wins++;
+
             } else if (gameState.gameBoard.length == 9 && !(gameState.gameBoard.includes(undefined))) {
                 //tie game
                 console.log('tie game!')
